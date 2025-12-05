@@ -6,6 +6,7 @@
   "client": [
     "InstinctMixin",
     "bartender.BartenderShopMixin",
+    "bartender.DefenseVialHandMixin",
     "coroner.CoronerHudMixin",
     "morphling.MorphlingRendererMixin",
     "morphling.MorphlingRoleNameRendererMixin",

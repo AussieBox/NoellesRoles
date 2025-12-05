@@ -249,7 +249,7 @@ public class Noellesroles implements ModInitializer {
                     abilityPlayerComponent.cooldown = GameConstants.getInTicks(0,10);
                     recallerPlayerComponent.setPosition();
                 }
-                if (playerShopComponent.balance >= 100) {
+                else if (playerShopComponent.balance >= 100) {
                     abilityPlayerComponent.cooldown = GameConstants.getInTicks(0,30);
                     recallerPlayerComponent.teleport();
                 }
