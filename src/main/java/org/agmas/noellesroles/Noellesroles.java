@@ -77,6 +77,7 @@ public class Noellesroles implements ModInitializer {
     public static Identifier RECALLER_ID = Identifier.of(MOD_ID, "recaller");
     public static Identifier EXECUTIONER_ID = Identifier.of(MOD_ID, "executioner");
     public static Identifier VULTURE_ID = Identifier.of(MOD_ID, "vulture");
+    public static Identifier BETTER_VIGILANTE_ID = Identifier.of(MOD_ID, "better_vigilante");
     public static Identifier THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES_ID = Identifier.of(MOD_ID, "the_insane_damned_paranoid_killer");
 
     public static HashMap<Role, RoleAnnouncementTexts.RoleAnnouncementText> roleRoleAnnouncementTextHashMap = new HashMap<>();
@@ -99,6 +100,7 @@ public class Noellesroles implements ModInitializer {
     public static Role RECALLER = TMMRoles.registerRole(new Role(RECALLER_ID, new Color(158, 255, 255).getRGB(),true,false,Role.MoodType.REAL, TMMRoles.CIVILIAN.getMaxSprintTime(),false));
 
     public static Role VULTURE =TMMRoles.registerRole(new Role(VULTURE_ID, new Color(181, 103, 0).getRGB(),false,false,Role.MoodType.FAKE, TMMRoles.CIVILIAN.getMaxSprintTime(),true));
+    public static Role BETTER_VIGILANTE =TMMRoles.registerRole(new Role(BETTER_VIGILANTE_ID, new Color(0, 255, 255).getRGB(),true,false,Role.MoodType.REAL, TMMRoles.CIVILIAN.getMaxSprintTime(),true));
 
     public static final CustomPayload.Id<MorphC2SPacket> MORPH_PACKET = MorphC2SPacket.ID;
     public static final CustomPayload.Id<SwapperC2SPacket> SWAP_PACKET = SwapperC2SPacket.ID;
@@ -133,6 +135,7 @@ public class Noellesroles implements ModInitializer {
         Harpymodloader.setRoleMaximum(EXECUTIONER_ID,1);
         Harpymodloader.setRoleMaximum(VULTURE_ID,1);
         Harpymodloader.setRoleMaximum(JESTER_ID,1);
+        Harpymodloader.setRoleMaximum(BETTER_VIGILANTE_ID,1);
 
         PayloadTypeRegistry.playC2S().register(MorphC2SPacket.ID, MorphC2SPacket.CODEC);
         PayloadTypeRegistry.playC2S().register(AbilityC2SPacket.ID, AbilityC2SPacket.CODEC);
@@ -189,6 +192,9 @@ public class Noellesroles implements ModInitializer {
                 vulturePlayerComponent.bodiesRequired = (int)((player.getWorld().getPlayers().size()/3f) - Math.floor(player.getWorld().getPlayers().size()/6f));
                 vulturePlayerComponent.sync();
             }
+            if (role.equals(BETTER_VIGILANTE)) {
+                player.giveItemStack(TMMItems.GRENADE.getDefaultStack());
+            }
             if (role.equals(JESTER)) {
                 player.giveItemStack(ModItems.FAKE_KNIFE.getDefaultStack());
                 player.giveItemStack(ModItems.FAKE_REVOLVER.getDefaultStack());
@@ -226,6 +232,9 @@ public class Noellesroles implements ModInitializer {
             HarpyModLoaderConfig.HANDLER.load();
             if (!HarpyModLoaderConfig.HANDLER.instance().disabled.contains(AWESOME_BINGLUS_ID.getPath())) {
                 HarpyModLoaderConfig.HANDLER.instance().disabled.add(AWESOME_BINGLUS_ID.getPath());
+            }
+            if (!HarpyModLoaderConfig.HANDLER.instance().disabled.contains(BETTER_VIGILANTE_ID.getPath())) {
+                HarpyModLoaderConfig.HANDLER.instance().disabled.add(BETTER_VIGILANTE_ID.getPath());
             }
             if (!HarpyModLoaderConfig.HANDLER.instance().disabled.contains(THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES_ID.getPath())) {
                 HarpyModLoaderConfig.HANDLER.instance().disabled.add(THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES_ID.getPath());
