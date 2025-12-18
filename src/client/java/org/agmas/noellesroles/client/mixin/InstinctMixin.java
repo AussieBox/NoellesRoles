@@ -16,6 +16,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.MathHelper;
 import org.agmas.noellesroles.Noellesroles;
 import org.agmas.noellesroles.bartender.BartenderPlayerComponent;
 import org.agmas.noellesroles.client.NoellesrolesClient;
@@ -74,27 +75,23 @@ public abstract class InstinctMixin {
                 }
             }
             if (!((PlayerEntity)target).isSpectator() && TMMClient.isInstinctEnabled()) {
-                if (gameWorldComponent.isRole((PlayerEntity) target, Noellesroles.VULTURE) && TMMClient.isKiller() && TMMClient.isPlayerAliveAndInSurvival()) {
-                    cir.setReturnValue(Noellesroles.VULTURE.color());
+                if (gameWorldComponent.isRole((PlayerEntity) target, Noellesroles.MIMIC) && TMMClient.isKiller() && TMMClient.isPlayerAliveAndInSurvival()) {
+                    cir.setReturnValue(MathHelper.hsvToRgb(0.0F, 1.0F, 0.6F));
                     cir.cancel();
                 }
             }
             if (!((PlayerEntity)target).isSpectator() && TMMClient.isInstinctEnabled()) {
-                if (gameWorldComponent.isRole((PlayerEntity) target, Noellesroles.EXECUTIONER) && TMMClient.isKiller() && TMMClient.isPlayerAliveAndInSurvival()) {
-                    cir.setReturnValue(Noellesroles.EXECUTIONER.color());
-                    cir.cancel();
-                }
-            }
-            if (!((PlayerEntity)target).isSpectator() && TMMClient.isInstinctEnabled()) {
-                if (gameWorldComponent.isRole((PlayerEntity) target, Noellesroles.JESTER) && TMMClient.isKiller() && TMMClient.isPlayerAliveAndInSurvival()) {
-                    cir.setReturnValue(Color.PINK.getRGB());
-                    cir.cancel();
-                }
-            }
-            if (!((PlayerEntity)target).isSpectator() && TMMClient.isInstinctEnabled()) {
-                if (gameWorldComponent.isRole(MinecraftClient.getInstance().player, Noellesroles.JESTER) && TMMClient.isPlayerAliveAndInSurvival()) {
-                    cir.setReturnValue(Color.PINK.getRGB());
-                    cir.cancel();
+                Role role = gameWorldComponent.getRole((PlayerEntity) target);
+                if (role != null) {
+                    if (TMMClient.isKiller() && TMMClient.isPlayerAliveAndInSurvival()) {
+                        if (Noellesroles.KILLER_SIDED_NEUTRALS.contains(role)) {
+                            cir.setReturnValue(role.color());
+                            cir.cancel();
+                        } else if (!role.isInnocent() && !role.canUseKiller()) {
+                           cir.setReturnValue(5168437);
+                           cir.cancel();
+                        }
+                    }
                 }
             }
             if (!((PlayerEntity)target).isSpectator() && TMMClient.isInstinctEnabled()) {

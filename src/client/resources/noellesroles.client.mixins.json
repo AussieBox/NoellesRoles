@@ -10,6 +10,9 @@
     "conductor.MasterKeyInvisibilityMixin",
     "coroner.CoronerHudMixin",
     "framing.FramingShopMixin",
+    "guesser.GuesserScreenDoNotClose",
+    "guesser.GuesserScreenMixin",
+    "guesser.GuesserSuggestorMixin",
     "morphling.MorphlingRendererMixin",
     "morphling.MorphlingRoleNameRendererMixin",
     "morphling.MorphlingScreenMixin",
@@ -34,6 +37,7 @@
     "conductor.MasterKeyHudMixin",
     "executioner.ExecutionerHudMixin",
     "executioner.ExecutionerMoodRenderer",
-    "jester.JesterMoodRenderer"
+    "jester.JesterMoodRenderer",
+    "killersided.KillerSidedTextsMixin"
   ]
 }
